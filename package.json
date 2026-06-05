@@ -1,0 +1,25 @@
+{
+  "name": "bdk-global-dns-cdk",
+  "version": "0.1.0",
+  "bin": {
+    "bdk-global-dns-cdk": "bin/bdk-global-dns-cdk.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "aws-cdk": "2.1119.0",
+    "jest": "^30.3.0",
+    "prettier": "^3.8.3",
+    "ts-jest": "^29.4.9",
+    "typescript": "~5.7.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.251.0",
+    "constructs": "^10.0.0"
+  }
+}
