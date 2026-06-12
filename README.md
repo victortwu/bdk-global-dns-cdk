@@ -14,10 +14,6 @@ Deploys to `us-east-1` (CloudFront requires certs in this region).
 
 ```
 bdk-global-dns-cdk/
-├── .kiro/
-│   ├── memory-bank.md
-│   └── steering/
-│       └── steering.md
 ├── bin/
 │   └── bdk-global-dns-cdk.ts
 ├── lib/
@@ -43,18 +39,4 @@ npm test
 npx cdk deploy
 ```
 
-After deployment, grab the `HostedZoneId` and `CertificateArn` from stack outputs and hardcode them into consumer stack configs (DataMgmt frontend, OrderGoods, etc.).
-
-## Consumer Pattern
-
-Consumer stacks reference the DNS resources by hardcoded values in their own `config.ts`:
-
-```typescript
-export const dnsConfig = {
-  hostedZoneId: 'Z0123456789ABCDEFGHIJ', // from BDK-GlobalDnsStack output
-  certificateArn: 'arn:aws:acm:us-east-1:653102291240:certificate/...', // from output
-  domainName: 'eatbdk.com',
-}
-```
-
-No cross-stack CDK references — these values are stable after initial deployment.
+After deployment, grab the `HostedZoneId` and `CertificateArn` from stack outputs and hardcode them into consumer stack configs.

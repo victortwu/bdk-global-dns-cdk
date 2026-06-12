@@ -5,14 +5,14 @@ import { Construct } from 'constructs'
 import { config } from '../../config'
 
 export class BdkGlobalDnsStack extends cdk.Stack {
-  public readonly hostedZone: route53.PublicHostedZone
+  public readonly hostedZone: route53.IHostedZone
   public readonly certificate: acm.Certificate
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
-    this.hostedZone = new route53.PublicHostedZone(this, 'HostedZone', {
-      zoneName: config.domainName,
+    this.hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
+      domainName: config.domainName,
     })
 
     this.certificate = new acm.Certificate(this, 'WildcardCert', {
@@ -23,8 +23,5 @@ export class BdkGlobalDnsStack extends cdk.Stack {
 
     new cdk.CfnOutput(this, 'HostedZoneId', { value: this.hostedZone.hostedZoneId })
     new cdk.CfnOutput(this, 'CertificateArn', { value: this.certificate.certificateArn })
-    new cdk.CfnOutput(this, 'NameServers', {
-      value: cdk.Fn.join(', ', this.hostedZone.hostedZoneNameServers!),
-    })
   }
 }

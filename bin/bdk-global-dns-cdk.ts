@@ -7,5 +7,5 @@ import { config } from '../config'
 const app = new cdk.App()
 
 new BdkGlobalDnsStack(app, 'BDK-GlobalDnsStack', {
-  env: { region: config.region },
+  env: { account: config.account, region: config.region },
 })
